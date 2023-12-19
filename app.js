@@ -2,6 +2,7 @@ const express = require('express');
 const route = require('./route/courseRoute');
 const authRoute = require('./route/authRoute');
 const mongoose = require('mongoose');
+const router = require('./route/TeamRoute');
 require('dotenv').config()
 
 const App = express();
@@ -9,6 +10,7 @@ const App = express();
 App.use(express.json())
 App.use("/courses", route)
 App.use("/auth", authRoute)
+App.use("/Team", router)
 
 mongoose
     .connect(process.env.MONGO_KEY)

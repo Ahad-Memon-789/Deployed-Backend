@@ -76,7 +76,16 @@ const AuthController = {
             res.status(400).send(Send(false, error, null))
         }
     },
+    getUsers: async (req, res) => {
+        try {
+            const allUsers = await AuthModel.find()
+            res.status(200).send(Send(true, 'all Users', allUsers))
+        }
+        catch (error) {
+            res.status(404).send(Send(true, 'You are No Rights for this Action', error))
+        }
 
+    },
     protected: (req, res, next) => {
         // bearer token = (ahahahahahahaha)
         const token = req.headers.authorize?.split(" ")[1]
