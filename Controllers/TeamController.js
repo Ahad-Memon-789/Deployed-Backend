@@ -35,7 +35,7 @@ const TeamController = {
       });
     }
   },
-  GetTeam: async (req , res) => {
+  GetTeam: async (req, res) => {
     try {
       const members = await Team.find();
       res.json({ success: true, data: members });
@@ -44,7 +44,30 @@ const TeamController = {
       // Respond with an error
       res.status(500).json({ success: false, message: 'Internal Server Error' });
     }
-  }
+  },
+  getTeamById: async (req, res) => {
+
+    try {
+      let id = req.params.id
+
+      let result = await Team.findById(id)
+      // console.log(result);
+      res.send({
+        isSuccessfull: true,
+        data: result,
+        message: "",
+      })
+      // let obj = courses.find((x) => x.id == id)
+
+
+    } catch (error) {
+      res.send({
+        isSuccessfull: false,
+        data: null,
+        message: "No Data Found",
+      })
+    }
+  },
 };
 
 module.exports = TeamController;
